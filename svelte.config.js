@@ -14,7 +14,7 @@ const config = {
 
 		alias: {
 			$server: './src/lib/server',
-			$db: './src/lib/server/db',
+			$db: './src/lib/server/db.ts',
 		}
 	}
 }
