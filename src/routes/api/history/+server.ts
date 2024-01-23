@@ -21,11 +21,12 @@ export const POST: RequestHandler = async ({ request }) => {
 
 export const DELETE: RequestHandler = async ({ request }) => {
   const { id } = await request.json()
-  const articleId = new ObjectId(id)
-
+  
   if (!id) {
     return error(400, 'Bad request: missing fields')
   }
+
+  const articleId = new ObjectId(id)
 
   await history.deleteOne({ _id: articleId })
 
@@ -34,12 +35,13 @@ export const DELETE: RequestHandler = async ({ request }) => {
 
 export const PUT: RequestHandler = async ({ request }) => {
   const { id, title, description, content } = await request.json()
-  const articleId = new ObjectId(id)
-
+  
   if (!id || !title || !description || !content) {
     return error(400, 'Bad request: missing fields')
   }
-
+  
+  const articleId = new ObjectId(id)
+  
   await history.updateOne({ _id: articleId }, { $set: { title, description, content } })
 
   return json({ message: 'ok' })
