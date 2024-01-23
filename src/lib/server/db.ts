@@ -6,9 +6,10 @@ const users = client.db('time').collection('users')
 const history = client.db('time').collection('history')
 const events = client.db('time').collection('events')
 
-export default async function connect() {
+export default async function databaseConnection() {
   try {
     await client.connect()
+    await client.db("admin").command({ ping: 1 })
     console.log('Successfull database connection')
   } catch (err) {
     console.error('Database connection error: ', err)

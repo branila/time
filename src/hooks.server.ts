@@ -1,3 +1,3 @@
-import Database from '$db'
+import databaseConnection from '$db'
 
-Database.connect()
+databaseConnection()
