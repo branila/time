@@ -1,4 +1,10 @@
-<!-- TODO: Login page customization -->
-<h1 class="flex pb-36 justify-center items-center h-screen text-8xl">
-  Login!
-</h1>
+<script lang="ts">
+  import { enhance } from '$app/forms'
+  
+  export let form
+  export let data
+</script>
+
+<form method="POST" use:enhance>
+
+</form>

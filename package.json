@@ -15,6 +15,8 @@
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/bcryptjs": "^2.4.6",
+		"@types/jsonwebtoken": "^9.0.5",
 		"autoprefixer": "^10.4.17",
 		"postcss": "^8.4.33",
 		"svelte": "^4.2.7",
@@ -27,6 +29,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"jsonwebtoken": "^9.0.2",
 		"mongodb": "^6.3.0"
 	}
 }
