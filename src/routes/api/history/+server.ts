@@ -7,7 +7,11 @@ export const GET: RequestHandler = async () => {
   return json(await history.find().toArray())
 }
 
-export const POST: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request, locals }) => {
+  if (!locals.user) {
+    return error(401, 'Unauthorized')
+  }
+
   const { title, description, content } = await request.json()
 
   if (!title || !description || !content) {
@@ -19,7 +23,11 @@ export const POST: RequestHandler = async ({ request }) => {
   return json({ message: 'ok' })
 }
 
-export const DELETE: RequestHandler = async ({ request }) => {
+export const DELETE: RequestHandler = async ({ request, locals }) => {
+  if (!locals.user) {
+    return error(401, 'Unauthorized')
+  }
+
   const { id } = await request.json()
   
   if (!id) {
@@ -33,7 +41,11 @@ export const DELETE: RequestHandler = async ({ request }) => {
   return json({ message: 'ok' })
 }
 
-export const PUT: RequestHandler = async ({ request }) => {
+export const PUT: RequestHandler = async ({ request, locals }) => {
+  if (!locals.user) {
+    return error(401, 'Unauthorized')
+  }
+
   const { id, title, description, content } = await request.json()
   
   if (!id || !title || !description || !content) {
