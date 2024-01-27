@@ -5,7 +5,7 @@ import { history } from '$db'
 export const load: PageServerLoad = async () => {
   const articles = structuredClone(await history.find().toArray())
   
-  if (!articles) {
+  if (!articles.length) {
     return error(404, 'Articles not found')
   }
 
