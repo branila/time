@@ -14,7 +14,7 @@ export const load = async ({ locals }) => {
 }
 
 export const actions = {
-  default: async ({ request, cookies }) => {
+  login: async ({ request, cookies }) => {
     const data = await request.formData()
 
     const username = data.get('username') 
@@ -49,4 +49,10 @@ export const actions = {
     
     return { success: true }
   },
+
+  logout: async ({ cookies }) => {
+    cookies.delete('AuthToken', { path: '/' })
+
+    return { loggedOut: true }
+  }
 } satisfies Actions
