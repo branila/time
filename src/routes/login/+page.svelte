@@ -5,7 +5,7 @@
   export let data
 </script>
 
-<form class="h-[calc(100vh-80px)] flex justify-center items-center flex-col" method="post" action="?/login">
+<form class="h-[calc(100vh-80px)] flex justify-center items-center flex-col" method="post" action="?/login" use:enhance>
   <h1 class="font-bold text-3xl mb-5">Login</h1>
   {#if data.loggedIn && !form?.success}
     <div class="font-bold mb-5">Already logged in</div>
