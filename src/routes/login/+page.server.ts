@@ -6,37 +6,36 @@ import jwt from 'jsonwebtoken'
 import { JWT_SECRET, ENV } from '$env/static/private'
 
 export const load = async ({ locals }) => {
-  if (locals.user) {
-    return { loggedIn: true }
-  } 
-
-  return { loggedIn: false }
+  return { loggedIn: locals.user ? true : false }
 }
 
 export const actions = {
-  login: async ({ request, cookies }) => {
-    const data = await request.formData()
+  login: async ({ request, cookies, locals }) => {
+    if (locals.user) {
+      cookies.delete('AuthToken', { path: '/' })
+    }
 
+    const data = await request.formData()
     const username = data.get('username') 
     const password = data.get('password')
 
     if (!username || !password) {
-      return fail(400, { error: 'Missing email or password' })
+      return fail(400, { error: 'Email o password mancanti' })
     }
 
     const user = await users.findOne({ username })
 
     if (!user) {
-      return fail(401, { error: 'Invalid credentials' })
+      return fail(401, { error: 'Credenziali non valide' })
     }
 
     const match = bcrypt.compare(password as string, user.password)
 
     if (!match) {
-      return fail(401, { error: 'Invalid credentials' })
+      return fail(401, { error: 'Credenziali non valide' })
     }
 
-    const payload = { id: user._id.toString(), username }
+    const payload = { id: user._id.toString() }
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '3d' })
 
     cookies.set('AuthToken', token, {

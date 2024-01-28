@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enhance } from '$app/forms'
+    import type { SubmitFunction } from './$types.js';
   
   export let form
   export let data
@@ -7,29 +8,30 @@
 
 <form class="h-[calc(100vh-80px)] flex justify-center items-center flex-col" method="post" action="?/login" use:enhance>
   <h1 class="font-bold text-3xl mb-5">Login</h1>
-  {#if data.loggedIn && !form?.success}
-    <div class="font-bold mb-5">Already logged in</div>
-  {/if}
+
+  <div class="font-bold mb-5">
+    {#if data.loggedIn && !form?.success}
+      Sei già loggato
+    {:else if form?.success}
+      Login effettuato con successo
+    {:else if form?.error}
+      Errore di autenticazione: {form.error}
+    {:else if form?.loggedOut}
+      Logout effettuato con successo
+    {/if}
+  </div>
 
   <div class="mb-5">
     <label for="username">Username</label>
-    <input class="border-2" type="text" id="username" name="username"/>
+    <input class="border-2" type="text" id="username" name="username" required/>
   </div>
 
   <div class="mb-5">
     <label for="password">Password</label>
-    <input class="border-2" type="password" id="password" name="password"/>
+    <input class="border-2" type="password" id="password" name="password" required/>
   </div>
 
   <button class="border-2 py-2 px-3 hover:cursor-pointer mb-5" type="submit">Login</button>
 
   <button formaction="?/logout" class="mb-5 underline">Logout</button>
-
-  {#if form?.success}
-    <div>Successfully logged in! Welcome back</div>
-  {:else if form?.error}
-    <div>Errore di autenticazione: {form?.error}</div>
-  {:else if form?.loggedOut}
-    <div>Successfully logged out</div>
-  {/if}
 </form>
