@@ -22,6 +22,7 @@ export const handle: Handle = async ({ event, resolve }) => {
       event.locals.user = {
         id: user._id.toString(),
         username: user.username,
+        role: user.role,
       }
     } catch (err) {
       console.error('Error: ', err)

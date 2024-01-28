@@ -11,6 +11,7 @@ declare global {
 			user: {
 				id: string
 				username: string
+				role: string
 			}
 		}
 	}
