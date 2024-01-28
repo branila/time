@@ -8,7 +8,7 @@ export const GET: RequestHandler = async ({ locals }) => {
     return error(401, 'Unauthorized')
   }
 
-  return json(await users.find().toArray())
+  return json((await users.find().toArray()).filter(user => user.id !== locals.user.id))
 }
 
 export const POST: RequestHandler = async ({ request, locals }) => {
@@ -38,6 +38,10 @@ export const DELETE: RequestHandler = async ({ request, locals }) => {
     return error(400, 'Bad request: missing fields')
   }
 
+  if (locals.user.id === id) {
+    return error(401, 'You cannot delete your user')
+  }
+
   const userId = new ObjectId(id)
 
   await users.deleteOne({ _id: userId })
@@ -54,6 +58,10 @@ export const PUT: RequestHandler = async ({ request, locals }) => {
   
   if (!id || !email || !password || !role) {
     return error(400, 'Bad request: missing fields')
+  }
+
+  if (locals.user.id === id) {
+    return error(401, 'You cannot edit your user')
   }
   
   const userId = new ObjectId(id)
