@@ -8,7 +8,7 @@ export const GET: RequestHandler = async ({ locals }) => {
     return error(401, 'Unauthorized')
   }
 
-  return json((await users.find().toArray()))
+  return json(await users.find().toArray())
 }
 
 export const POST: RequestHandler = async ({ request, locals }) => {
