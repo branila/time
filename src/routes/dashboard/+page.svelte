@@ -1,0 +1,1 @@
+<h1 class="text-10xl font-bold flex justify-center">Dashboard!</h1>
