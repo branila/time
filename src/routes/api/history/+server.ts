@@ -2,7 +2,7 @@ import { json, error } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 import { history } from '$db'
 import { ObjectId } from 'mongodb'
-import marked from 'marked'
+import { marked } from 'marked'
 
 export const GET: RequestHandler = async () => {
   return json(await history.find().toArray())
@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
     return error(400, 'Bad request: missing fields')
   }
 
-  description = marked.parse(description)
+  content = await marked.parse(content)
 
   await history.insertOne({ title, description, content })
 
@@ -57,7 +57,7 @@ export const PUT: RequestHandler = async ({ request, locals }) => {
 
   const articleId = new ObjectId(id)
   
-  description = marked.parse(description)
+  content = await marked.parse(content)
   
   await history.updateOne({ _id: articleId }, { $set: { title, description, content } })
 
