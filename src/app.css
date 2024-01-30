@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "MuseoSans500";
+    src: url("$lib/fonts/MuseoSans_500.otf");
+  }
+
+    @font-face {
+        font-family: "MuseoSans700";
+        src: url("$lib/fonts/MuseoSans_700.otf");
+    }
+
+    @font-face {
+        font-family: "MuseoSans100";
+        src: url("$lib/fonts/MuseoSans-100.otf");
+    }
+
+    @font-face {
+        font-family: "MuseoSans300";
+        src: url("$lib/fonts/MuseoSans-300.otf");
+    }
+
+    @font-face {
+        font-family: "AmbroiseRegular";
+        src: url("$lib/fonts/Ambroise-Regular.otf");
+    }
