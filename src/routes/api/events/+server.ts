@@ -12,13 +12,13 @@ export const POST: RequestHandler = async ({ request, locals }) => {
     return error(401, 'Unauthorized')
   }
 
-  let { title, description, date, time, duration } = await request.json()
+  let { title, description, date, duration } = await request.json()
 
-  if (!title || !description || !date || !time || !duration) {
+  if (!title || !description || !date || !duration) {
     return error(400, 'Bad request: missing fields')
   }
 
-  await events.insertOne({ title, description, date, time, duration })
+  await events.insertOne({ title, description, date, duration })
 
   return json({ message: 'ok' })
 }
@@ -46,15 +46,15 @@ export const PUT: RequestHandler = async ({ request, locals }) => {
     return error(401, 'Unauthorized')
   }
 
-  let { id, title, description, date, time, duration } = await request.json()
+  let { id, title, description, date, duration } = await request.json()
   
-  if (!id || !title || !description || !date || !time || !duration) {
+  if (!id || !title || !description || !date || !duration) {
     return error(400, 'Bad request: missing fields')
   }
   
   const eventId = new ObjectId(id)
 
-  await events.updateOne({ _id: eventId }, { $set: { title, description, date, time, duration } })
+  await events.updateOne({ _id: eventId }, { $set: { title, description, date, duration } })
 
   return json({ message: 'ok' })
 }
