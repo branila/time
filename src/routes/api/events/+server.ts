@@ -2,7 +2,6 @@ import { json, error } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 import { events } from '$db'
 import { ObjectId } from 'mongodb'
-import { marked } from 'marked'
 
 export const GET: RequestHandler = async () => {
   return json(await events.find().toArray())
@@ -13,15 +12,13 @@ export const POST: RequestHandler = async ({ request, locals }) => {
     return error(401, 'Unauthorized')
   }
 
-  let { title, description, content } = await request.json()
+  let { title, description, date, time, duration } = await request.json()
 
-  if (!title || !description || !content) {
+  if (!title || !description || !date || !time || !duration) {
     return error(400, 'Bad request: missing fields')
   }
 
-  content = await marked.parse(content)
-
-  await events.insertOne({ title, description, content })
+  await events.insertOne({ title, description, date, time, duration })
 
   return json({ message: 'ok' })
 }
@@ -49,17 +46,15 @@ export const PUT: RequestHandler = async ({ request, locals }) => {
     return error(401, 'Unauthorized')
   }
 
-  let { id, title, description, content } = await request.json()
+  let { id, title, description, date, time, duration } = await request.json()
   
-  if (!id || !title || !description || !content) {
+  if (!id || !title || !description || !date || !time || !duration) {
     return error(400, 'Bad request: missing fields')
   }
   
   const eventId = new ObjectId(id)
 
-  content = await marked.parse(content)
-
-  await events.updateOne({ _id: eventId }, { $set: { title, description, content } })
+  await events.updateOne({ _id: eventId }, { $set: { title, description, date, time, duration } })
 
   return json({ message: 'ok' })
 }
