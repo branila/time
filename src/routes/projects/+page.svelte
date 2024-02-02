@@ -1,4 +1,8 @@
-<!-- TODO: Login page customization -->
-<h1 class="flex pb-36 justify-center items-center h-screen text-8xl">
-  Progetti!
-</h1>
+<script>
+  export let data;
+</script>
+
+<section class="mx-[5%] md:mx-[20%] relative">
+
+
+</section>
