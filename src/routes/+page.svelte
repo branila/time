@@ -1,10 +1,8 @@
 <script>
-  export let data;
+  export let data
 </script>
 
-
 <section class="mx-[5%] md:mx-[20%] relative">
-  <!--Hero-->
   <section class="h-screen">
     <div class="grid md:grid-cols-2 gap-4 md:gap-16 mt-32">
       <div>
@@ -174,8 +172,8 @@
 
   <section class="my-32">
     <div class="grid xl:grid-cols-3 gap-10">
-      {#if data.ev.length > 0}
-        {#each data.ev.slice(0, 3) as event (event)}
+      {#if data.event.length > 0}
+        {#each data.event.slice(0, 3) as event}
           <div
             class="relative flex flex-col mt-6 text-gray-900 border border-black bg-clip-border"
           >

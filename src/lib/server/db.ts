@@ -5,6 +5,7 @@ const client = new MongoClient(MONGO_URL)
 const users = client.db('time').collection('users')
 const history = client.db('time').collection('history')
 const events = client.db('time').collection('events')
+const projects = client.db('time').collection('projects')
 
 export default async function databaseConnection() {
   try {
@@ -16,4 +17,4 @@ export default async function databaseConnection() {
   }
 }
 
-export { users, history, events }
+export { users, history, events, projects }

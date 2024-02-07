@@ -1,15 +1,13 @@
-import { events } from '$db';
-
-import { error } from '@sveltejs/kit';
-
-import type { PageServerLoad } from './$types';
+import { events } from '$db'
+import { error } from '@sveltejs/kit'
+import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async () => {
-  const ev = structuredClone(await events.find().toArray())
+  const event = structuredClone(await events.find().toArray())
   
-  if (!ev) {
+  if (!event) {
     return error(404, 'Articles not found')
   }
 
-  return { ev }
+  return { event }
 }

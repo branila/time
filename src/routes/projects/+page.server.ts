@@ -1,15 +1,13 @@
-import { projects } from '$db';
-
-import { error } from '@sveltejs/kit';
-
-import type { PageServerLoad } from './$types';
+import { projects } from '$db'
+import { error } from '@sveltejs/kit'
+import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async () => {
-  const prog = structuredClone(await projects.find().toArray())
+  const project = structuredClone(await projects.find().toArray())
   
-  if (!prog) {
+  if (!project.length) {
     return error(404, 'Projects not found')
   }
 
-  return { prog }
+  return { project }
 }

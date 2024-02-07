@@ -2,36 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-h2{
+h2 {
     font-size: 35px;
     font-weight: 600;
-}
     font-size: 17px;
 }
 
 @font-face {
     font-family: "MuseoSans500";
     src: url("/fonts/MuseoSans_500.otf");
-  }
+}
 
-    @font-face {
-        font-family: "MuseoSans700";
-        src: url("/fonts/MuseoSans_700.otf");
-    }
+@font-face {
+    font-family: "MuseoSans700";
+    src: url("/fonts/MuseoSans_700.otf");
+}
 
-    @font-face {
-        font-family: "MuseoSans100";
-        src: url("/fonts/MuseoSans-100.otf");
-    }
+@font-face {
+    font-family: "MuseoSans100";
+    src: url("/fonts/MuseoSans-100.otf");
+}
 
-    @font-face {
-        font-family: "MuseoSans300";
-        src: url("/fonts/MuseoSans-300.otf");
-    }
+@font-face {
+    font-family: "MuseoSans300";
+    src: url("/fonts/MuseoSans-300.otf");
+}
 
-    @font-face {
-        font-family: "AmbroiseRegular";
-        src: url("/fonts/Ambroise-Regular.otf");
-    }
+@font-face {
+    font-family: "AmbroiseRegular";
+    src: url("/fonts/Ambroise-Regular.otf");
+}
