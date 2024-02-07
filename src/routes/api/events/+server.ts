@@ -36,6 +36,10 @@ export const DELETE: RequestHandler = async ({ request, locals }) => {
 
   const eventId = new ObjectId(id)
 
+  if (!await events.findOne({ _id: eventId })) {
+    return error(404, 'Cannot delete non-existing event')
+  }
+
   await events.deleteOne({ _id: eventId })
 
   return json({ message: 'ok' })
@@ -53,6 +57,10 @@ export const PUT: RequestHandler = async ({ request, locals }) => {
   }
   
   const eventId = new ObjectId(id)
+
+  if (!await events.findOne({ _id: eventId })) {
+    return error(404, 'Cannot update non-existing event')
+  }
 
   await events.updateOne({ _id: eventId }, { $set: { title, description, date, duration } })
 

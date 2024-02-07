@@ -39,6 +39,10 @@ export const DELETE: RequestHandler = async ({ request, locals }) => {
 
   const articleId = new ObjectId(id)
 
+  if (!await history.findOne({ _id: articleId })) {
+    return error(404, 'Cannot delete non-existing article')
+  }
+
   await history.deleteOne({ _id: articleId })
 
   return json({ message: 'ok' })
@@ -56,6 +60,10 @@ export const PUT: RequestHandler = async ({ request, locals }) => {
   }
 
   const articleId = new ObjectId(id)
+
+  if (!await history.findOne({ _id: articleId })) {
+    return error(404, 'Cannot update non-existing article')
+  }
   
   content = await marked.parse(content)
   

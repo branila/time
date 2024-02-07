@@ -39,10 +39,14 @@ export const DELETE: RequestHandler = async ({ request, locals }) => {
   }
 
   if (locals.user.id === id) {
-    return error(401, 'You cannot delete your user')
+    return error(401, 'You cannot delete your own user')
   }
 
   const userId = new ObjectId(id)
+
+  if (!await users.findOne({ _id: userId })) {
+    return error(404, 'Cannot delete non-existing user')
+  }
 
   await users.deleteOne({ _id: userId })
 
@@ -65,6 +69,10 @@ export const PUT: RequestHandler = async ({ request, locals }) => {
   }
   
   const userId = new ObjectId(id)
+
+  if (!await users.findOne({ _id: userId })) {
+    return error(404, 'Cannot update non-existing user')
+  }
   
   await users.updateOne({ _id: userId }, { $set: { email, password, role } })
 
